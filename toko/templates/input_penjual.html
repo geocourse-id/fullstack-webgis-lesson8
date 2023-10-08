@@ -1,0 +1,15 @@
+{% extends 'context/base.html' %}
+
+{% block title %}
+  INPUT PENJUAL
+{% endblock %}
+
+{% block head %}{% endblock %}
+
+{% block body %}
+  <form method="post">
+    {% csrf_token %}
+    {{form}}
+    <input type="submit" value="KIRIM DATA">
+  </form>
+{% endblock %}

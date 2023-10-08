@@ -5,3 +5,4 @@ class Penjual(models.Model):
   nama = models.CharField(max_length=30, null=False, blank=False, unique=True)
   umur = models.IntegerField()
   perempuan = models.BooleanField(default=False)
+  foto = models.ImageField(upload_to='foto_penjual', null=True, blank=False)

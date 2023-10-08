@@ -16,12 +16,19 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from toko.views import faiz, home, about, penjual
+from django.conf import settings
+from django.conf.urls.static import static
+from toko.views import faiz, home, about, penjual, Peta, input_penjual
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home),
     path('faiz/', faiz),
     path('tentang/', about),
-    path('penjual/', penjual),
+    path('penjual/', penjual, name='penjual'),
+    path('peta/', Peta.as_view()),
+    path('penjual/input/', input_penjual, name='form_input_penjual')
 ]
+
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

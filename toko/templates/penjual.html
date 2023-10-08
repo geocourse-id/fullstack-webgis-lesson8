@@ -1,16 +1,20 @@
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Penjual</title>
-</head>
-<body>
+{% extends 'context/base.html' %}
+
+{% block title %}
+  PENJUAL
+{% endblock %}
+{% block head %}{% endblock %}
+{% block body %}
+  <a href="{% url 'form_input_penjual' %}" class="btn btn-primary">TAMBAH DATA</a>
+
   <h1>Daftar Penjual</h1>
 
   <ol>
   {% for data in penjual %}
-    <li>{{data.nama}} | {{data.umur}} | {{data.perempuan}}</li>
+    <li>
+      {{data.nama}} | {{data.umur}} | {{data.perempuan}} <br>
+      <img src="/media/{{data.foto}}" alt="{{data.nama}}" height="50px">
+    </li>
   {% endfor %}
   </ol>
-</body>
-</html>
+{% endblock %}
