@@ -1,0 +1,16 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Penjual</title>
+</head>
+<body>
+  <h1>Daftar Penjual</h1>
+
+  <ol>
+  {% for data in penjual %}
+    <li>{{data.nama}} | {{data.umur}} | {{data.perempuan}}</li>
+  {% endfor %}
+  </ol>
+</body>
+</html>
