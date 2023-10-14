@@ -1,0 +1,24 @@
+{% extends 'context/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+  DELETE PENJUAL
+{% endblock %}
+
+{% block head %}{% endblock %}
+
+{% block body %}
+  <h1>Form untuk Delete Data</h1>
+  <p>Apakah kamu yakin akan menghapus data ini?</p>
+  <ul>
+    <li>{{data.id}}</li>
+    <li>{{data.nama}}</li>
+    <li>{{data.umur}}</li>
+    <li>{{data.perempuan}}</li>
+    <li><img src="/media/{{data.foto}}" alt="image"></li>
+  </ul>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <input type="submit" value="DELETE DATA">
+  </form>
+{% endblock %}

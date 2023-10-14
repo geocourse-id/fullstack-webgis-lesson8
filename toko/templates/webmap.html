@@ -1,0 +1,57 @@
+{% extends 'context/base.html' %}
+
+{% block title %}
+  WEBMAP
+{% endblock %}
+
+{% block head %}
+  <!-- LEAFLET -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+{% endblock %}
+
+{% block body %}
+  <h1>TAMPILAN PETA WEB</h1>
+
+  <div>{{data}}</div>
+
+  <ul>
+    {% for item in data %}
+    <li>
+      <div>{{item}}</div>
+      <div>{{item.nama}}</div>
+      <div>{{item.alamat}}</div>
+      <div>{{item.foto}}</div>
+      <div>{{item.lokasi}}</div>
+      <div>{{item.lokasi.x}}</div>
+      <div>{{item.lokasi.y}}</div>
+      <div>{{item.lokasi.json}}</div>
+    </li>
+    {% endfor %}
+  </ul>
+
+  <div id="map" style="height: 500;"></div>
+
+  <script>
+    var map = L.map('map').setView([-2, 110], 5);
+
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    '{% for item in data %}'
+      L.marker(['{{item.lokasi.y}}', '{{item.lokasi.x}}']).addTo(map)
+        .bindPopup(
+          `
+            <h1>{{item.nama}}</h1>
+            <p>{{item.alamat}}</p>
+            <img src="/media/{{item.foto}}" height=50>
+          `
+        )
+    '{% endfor %}'
+
+    // L.marker([51.5, -0.09]).addTo(map)
+    //     .bindPopup('A pretty CSS popup.<br> Easily customizable.')
+    //     .openPopup();
+  </script>
+{% endblock %}

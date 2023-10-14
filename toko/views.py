@@ -1,7 +1,7 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.views import View
-from .models import Penjual
+from .models import Penjual, Toko
 from .forms import FormPenjual
 
 # Create your views here.
@@ -16,7 +16,7 @@ def about(request):
   return render(request, 'about.html')
 
 def penjual(request):
-  data_penjual = Penjual.objects.all()
+  data_penjual = Penjual.objects.all().order_by('id')
   # for data in data_penjual:
   #   print(data.nama, data.umur)
   context = {
@@ -53,7 +53,7 @@ class Peta(View):
   
 def input_penjual(request):
   if request.method == 'POST':
-    form = FormPenjual(request.POST)
+    form = FormPenjual(request.POST, request.FILES)
     if form.is_valid():
       form.save()
       # return HttpResponse('Data anda valid, bisa diproses')
@@ -66,3 +66,36 @@ def input_penjual(request):
     'form': form
   }
   return render(request, 'input_penjual.html', context)
+
+def update_penjual(request, pk):
+  objek = get_object_or_404(Penjual, id=pk)
+  form = FormPenjual(request.POST or None, request.FILES or None, instance=objek)
+
+  if request.method == 'POST':
+    if form.is_valid():
+      form.save()
+      return redirect('penjual')
+
+  context = {
+    'form': form
+  }
+
+  return render(request, 'update_penjual.html', context)
+
+def delete_penjual(request, pk):
+  objek = get_object_or_404(Penjual, id=pk)
+
+  if request.method == 'POST':
+    objek.delete()
+    return redirect('penjual')
+  
+  context = {
+    'data': objek
+  }
+  return render(request, 'delete_penjual.html', context)
+
+def webmap(request):
+  context = {
+    'data': Toko.objects.all()
+  }
+  return render(request, 'webmap.html', context)

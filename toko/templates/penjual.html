@@ -13,7 +13,9 @@
   {% for data in penjual %}
     <li>
       {{data.nama}} | {{data.umur}} | {{data.perempuan}} <br>
-      <img src="/media/{{data.foto}}" alt="{{data.nama}}" height="50px">
+      <img src="/media/{{data.foto}}" alt="{{data.nama}}" height="50px"> <br>
+      <button><a href="{% url 'form_update_penjual' data.id %}">Update</a></button>
+      <button><a href="{% url 'form_delete_penjual' data.id %}">Delete</a></button>
     </li>
   {% endfor %}
   </ol>

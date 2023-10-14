@@ -18,16 +18,19 @@ from django.contrib import admin
 from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
-from toko.views import faiz, home, about, penjual, Peta, input_penjual
+from toko.views import faiz, home, about, penjual, Peta, input_penjual, update_penjual, delete_penjual, webmap
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', home),
+    path('', home, name='home'),
     path('faiz/', faiz),
-    path('tentang/', about),
+    path('tentang/', about, name='tentang'),
     path('penjual/', penjual, name='penjual'),
-    path('peta/', Peta.as_view()),
-    path('penjual/input/', input_penjual, name='form_input_penjual')
+    path('testing/', Peta.as_view(), name='testing'),
+    path('penjual/input/', input_penjual, name='form_input_penjual'),
+    path('penjual/update/<int:pk>/', update_penjual, name='form_update_penjual'),
+    path('penjual/delete/<int:pk>/', delete_penjual, name='form_delete_penjual'),
+    path('webmap/', webmap)
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

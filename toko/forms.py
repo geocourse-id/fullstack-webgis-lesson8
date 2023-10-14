@@ -4,4 +4,4 @@ from .models import Penjual
 class FormPenjual(ModelForm):
   class Meta:
     model = Penjual
-    fields = ['nama', 'umur', 'perempuan']
+    fields = ['nama', 'umur', 'perempuan', 'foto']

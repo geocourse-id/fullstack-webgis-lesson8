@@ -2,15 +2,16 @@
 {% load crispy_forms_tags %}
 
 {% block title %}
-  INPUT PENJUAL
+  UPDATE PENJUAL
 {% endblock %}
 
 {% block head %}{% endblock %}
 
 {% block body %}
+  <h1>Form untuk Update Data</h1>
   <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{form|crispy}}
-    <input type="submit" value="KIRIM DATA">
+    <input type="submit" value="UPDATE DATA">
   </form>
 {% endblock %}
